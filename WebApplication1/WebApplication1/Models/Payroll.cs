@@ -10,7 +10,7 @@ namespace WebApplication1.Models
         public Months Month { get; set; }
         public int Year { get; set; }
         public int Status { get; set; }
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
         public Employee Employee { get; set; }
     }
 }

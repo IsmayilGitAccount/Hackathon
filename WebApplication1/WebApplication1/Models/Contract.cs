@@ -10,5 +10,5 @@ public class Contract
     public DateTime EndDate { get; set; }
 
     public Employee Employee { get; set; }
-    public int EmployeeId { get; set; }
+    public string EmployeeId { get; set; }
 }

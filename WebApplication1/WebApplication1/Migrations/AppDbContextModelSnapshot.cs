@@ -240,8 +240,9 @@ namespace WebApplication1.Migrations
                     b.Property<byte>("BonusPercentage")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -257,7 +258,76 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.ToTable("Contracts");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Payroll", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Bonus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Salary")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Payrolls");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.VacationRequests", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("VacationRequests");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Employee", b =>
@@ -267,19 +337,12 @@ namespace WebApplication1.Migrations
                     b.Property<double?>("Bonus")
                         .HasColumnType("float");
 
-                    b.Property<int>("ContractId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FullName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<double?>("Salary")
                         .HasColumnType("float");
-
-                    b.HasIndex("ContractId")
-                        .IsUnique()
-                        .HasFilter("[ContractId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Employee");
                 });
@@ -335,21 +398,46 @@ namespace WebApplication1.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Employee", b =>
+            modelBuilder.Entity("WebApplication1.Models.Contract", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Contract", "Contract")
-                        .WithOne("Employee")
-                        .HasForeignKey("WebApplication1.Models.Employee", "ContractId")
+                    b.HasOne("WebApplication1.Models.Employee", "Employee")
+                        .WithMany("Contracts")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Contract");
+                    b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.Contract", b =>
+            modelBuilder.Entity("WebApplication1.Models.Payroll", b =>
                 {
-                    b.Navigation("Employee")
+                    b.HasOne("WebApplication1.Models.Employee", "Employee")
+                        .WithMany("Payrolls")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.VacationRequests", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Employee", "Employee")
+                        .WithMany("Vacations")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Employee", b =>
+                {
+                    b.Navigation("Contracts");
+
+                    b.Navigation("Payrolls");
+
+                    b.Navigation("Vacations");
                 });
 #pragma warning restore 612, 618
         }

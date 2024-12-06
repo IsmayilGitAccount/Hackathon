@@ -11,6 +11,7 @@ namespace WebApplication1.DAL
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Payroll> Payrolls { get; set; }
+        public DbSet<VacationRequests> VacationRequests { get; set; }
 
     }
 }
