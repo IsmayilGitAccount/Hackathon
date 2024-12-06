@@ -10,4 +10,5 @@ public class Employee : IdentityUser
     public string FullName { get; set; }
     public double Salary { get; set; }
     public double Bonus { get; set; }
+    public List<Payroll> Payrolls { get; set; }
 }
