@@ -12,7 +12,6 @@ public class Employee : IdentityUser
     public List<Payroll>? Payrolls { get; set; }
 
     //relational
-
     public List<VacationRequests>? Vacations { get; set; }
 
 

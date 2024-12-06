@@ -30,7 +30,7 @@ namespace WebApplication1.Areas.manage.Controllers
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user is null)
-            {
+        {
                 return NotFound();
             }
 
@@ -41,7 +41,7 @@ namespace WebApplication1.Areas.manage.Controllers
             if (totalHours > contract.MonthlyMaxHours)
             {
                 var bonusSalary = (totalHours - contract.MonthlyMaxHours) * contract.HourlyRate * 2;
-            }
+        }
 
             Payroll newPayroll = new()
             {

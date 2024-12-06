@@ -19,9 +19,9 @@ public class AttendanceController : Controller
         _userManager = userManager;
     }
     public IActionResult Index()
-    {
-        return View();
-    }
+        {
+            return View();
+        }
     [Authorize]
     public async Task<IActionResult> StartAttendance()
     {
@@ -44,7 +44,7 @@ public class AttendanceController : Controller
 
     [Authorize]
     public async Task<IActionResult> EndAttendance()
-    {
+            {
         var existUser = await _userManager.FindByNameAsync(User.Identity.Name);
         var attendances = await _appDbContext.Attendances.ToListAsync();
         if (!_appDbContext.Attendances.Any(x => x.EmployeeId == existUser.Id))
@@ -57,7 +57,7 @@ public class AttendanceController : Controller
         attendance.TotalHours = (int)Math.Ceiling(timeSpan.Value.Minutes / 60.0);
 
         var userContract = await _appDbContext.Contracts.Where(x => x.EmployeeId == existUser.Id).FirstOrDefaultAsync();
-
+            
         if (attendance.TotalHours > (userContract.MonthlyMaxHours / 30))
         {
             attendance.OvertimeHours = attendance.TotalHours - (userContract.MonthlyMaxHours / 30);
