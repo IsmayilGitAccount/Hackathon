@@ -18,9 +18,9 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddIdentity<Employee, IdentityRole>(opt =>
 {
-    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
-    opt.User.RequireUniqueEmail = true;
+    opt.User.RequireUniqueEmail = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IEmailService, EmailService>();

@@ -22,34 +22,33 @@ namespace WebApplication1.Controllers
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create(EmployeeCreateVM um)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            Employee emp = new()
-            {
-                FullName = um.FullName,
-            };
-            var result = await _emp.CreateAsync(emp, um.Password);
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
+        //[HttpGet]
+        //public async Task<IActionResult> Create()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> Create(EmployeeCreateVM um)
+        //{
+        //    Employee emp = new()
+        //    {
+        //        FullName = um.FullName,
+        //    };
+        //    var result = await _emp.CreateAsync(emp, um.Password);
+        //    if (!result.Succeeded)
+        //    {
+        //        foreach (var error in result.Errors)
+        //        {
+        //            ModelState.AddModelError("", error.Description);
 
-                }
-                return View();
-            }
-            string token = await _emp.GenerateEmailConfirmationTokenAsync(emp);
-            _service.SendEmailConfirmation(emp.Email, emp.UserName, token);
-            return Content("Email send!");
+        //        }
+        //        return View();
+        //    }
+        //    string token = await _emp.GenerateEmailConfirmationTokenAsync(emp);
+        //    _service.SendEmailConfirmation(emp.Email, emp.UserName, token);
+        //    return Content("Email send!");
 
-        }
+        //}
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -137,8 +136,6 @@ namespace WebApplication1.Controllers
             var model = new EmployeeUpdateVM
             {
                 FullName = employee.FullName,
-                Bonus = employee.Bonus,
-                Salary = employee.Salary,
             };
 
             return View(model);
@@ -158,8 +155,7 @@ namespace WebApplication1.Controllers
                 return Unauthorized();
             }
             employee.FullName = model.FullName;
-            employee.Salary = model.Salary;
-            employee.Bonus = model.Bonus;
+
 
             if (!string.IsNullOrEmpty(model.Password))
             {
