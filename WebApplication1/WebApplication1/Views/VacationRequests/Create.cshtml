@@ -1,0 +1,19 @@
+﻿@using WebApplication1.ViewModels.VacationRequests
+@model CreateVacationRequestsVM;
+<form action="Index" method="post">
+
+	<div class="input-group input-group-sm mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+		</div>
+		<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" asp-for="StartDate">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Default</span>
+		</div>
+		<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" asp-for="StartDate ">
+	</div>
+	<button>submit</button>
+</form>
