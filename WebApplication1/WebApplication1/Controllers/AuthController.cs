@@ -12,37 +12,6 @@ namespace WebApplication1.Controllers
 {
     public class AccountController(AppDbContext _sql, UserManager<Employee> _emp, SignInManager<Employee> _sign, IOptions<SmtpOption> _opt) : Controller
     {
-        SmtpOption smtp = _opt.Value;
-
-
-
-        //[HttpGet]
-        //public async Task<IActionResult> Create()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> Create(EmployeeCreateVM um)
-        //{
-        //    Employee emp = new()
-        //    {
-        //        FullName = um.FullName,
-        //    };
-        //    var result = await _emp.CreateAsync(emp, um.Password);
-        //    if (!result.Succeeded)
-        //    {
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error.Description);
-
-        //        }
-        //        return View();
-        //    }
-        //    string token = await _emp.GenerateEmailConfirmationTokenAsync(emp);
-        //    _service.SendEmailConfirmation(emp.Email, emp.UserName, token);
-        //    return Content("Email send!");
-
-        //}
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -98,26 +67,6 @@ namespace WebApplication1.Controllers
             await _sign.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        public async Task<IActionResult> VerifyEmail(string token, string user)
-        {
-            var entity = await _emp.FindByNameAsync(user);
-            if (entity is null) return BadRequest();
-            var result = await _emp.ConfirmEmailAsync(entity, token.Replace(' ', '+'));
-            if (!result.Succeeded)
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (var item in result.Errors)
-                {
-                    sb.Append(item.Description);
-                }
-                return Content(sb.ToString());
-            }
-
-            await _sign.SignInAsync(entity, true);
-            return RedirectToAction("Index", "Home");
-
-        }
-
         [HttpGet]
         public async Task<IActionResult> Update()
         {
@@ -181,10 +130,5 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-
-
-
     }
 }

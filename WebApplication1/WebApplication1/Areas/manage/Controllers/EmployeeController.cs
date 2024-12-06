@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.DAL;
 using WebApplication1.Models;
 using WebApplication1.Services;
@@ -8,6 +10,7 @@ using WebApplication1.ViewModels.Login;
 namespace WebApplication1.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize("SuperAdmin")]
     public class EmployeeController : Controller
     {
         private readonly UserManager<Employee> _userManager;
@@ -21,9 +24,14 @@ namespace WebApplication1.Areas.manage.Controllers
             _dbContext = dbContext;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return View(users);
+        }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -74,5 +82,7 @@ namespace WebApplication1.Areas.manage.Controllers
 
             return RedirectToAction("index", "dashboard");
         }
+
+
     }
 }

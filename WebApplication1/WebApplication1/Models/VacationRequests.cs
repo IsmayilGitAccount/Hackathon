@@ -11,5 +11,7 @@
 
         //relational
         public Employee Employee { get; set; }
+
+        public bool IsAccepted { get; set; }
     }
 }
