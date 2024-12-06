@@ -1,0 +1,12 @@
+.admin-dashboard {
+  margin-left: 350px;
+  .admin-charts {
+    h1 {
+      padding: 50px;
+    }
+    #myChart {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  }
+}
