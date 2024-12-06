@@ -70,8 +70,6 @@ namespace WebApplication1.Controllers
             data.Status = Vm.Status;
             await _sql.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
-
         }
     }
 
