@@ -12,4 +12,5 @@ public class Employee : IdentityUser
 
     public int ContractId { get; set; }
     public Contract Contract { get; set; }
+    public List<Payroll> Payrolls { get; set; }
 }
