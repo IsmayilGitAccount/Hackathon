@@ -10,7 +10,6 @@ using WebApplication1.ViewModels.Login;
 namespace WebApplication1.Areas.manage.Controllers
 {
     [Area("manage")]
-    [Authorize("SuperAdmin")]
     public class EmployeeController : Controller
     {
         private readonly UserManager<Employee> _userManager;
@@ -28,6 +27,15 @@ namespace WebApplication1.Areas.manage.Controllers
         {
             var users = await _userManager.Users.ToListAsync();
             return View(users);
+        }
+
+        public IActionResult Employeed()
+        {
+            return View();
+        }
+        public IActionResult EmployeeRequest()
+        {
+            return View();
         }
 
         [HttpGet]

@@ -9,7 +9,6 @@ namespace WebApplication1.Areas.manage.Controllers
 {
     [Area("manage")]
 
-    [Authorize("SuperAdmin")]
     public class PayrollController : Controller
     {
         private readonly AppDbContext _appDbContext;

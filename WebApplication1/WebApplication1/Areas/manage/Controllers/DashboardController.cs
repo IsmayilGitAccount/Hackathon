@@ -7,7 +7,7 @@ namespace WebApplication1.Areas.manage.Controllers
 {
     [Area("manage")]
 
-    [Authorize("SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class DashboardController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

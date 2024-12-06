@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -231,6 +232,18 @@ header nav .buttons button:hover {
 .admin-sidebar .heading .admin-details p {
   font-size: 14px;
 }
+.admin-sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.admin-sidebar ul li {
+  color: #fff;
+  padding: 10px 40px;
+}
+.admin-sidebar ul li a {
+  color: #fff;
+}
 
 .user-dashboard .dashboard-name {
   margin-bottom: 20px;
@@ -399,8 +412,18 @@ header nav .buttons button:hover {
   padding: 50px;
 }
 .admin-dashboard .admin-charts #myChart {
-  max-width: 1000px;
+  max-width: 1500px;
   margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 500px;
+  align-items: center;
 }
 
 #login-form {
@@ -410,7 +433,7 @@ header nav .buttons button:hover {
   flex-direction: column;
   gap: 30px;
   width: 100%;
-  background-image: url(https://img.freepik.com/free-photo/business-people-blue-background_53876-101889.jpg?t=st=1733469394~exp=1733472994~hmac=135fbae7ee236a891529f9274c4345afe1e0d96eaabe9533a89052506e31b6d5&w=1060);
+  background-image: url("https://img.freepik.com/premium-vector/padlock-with-keyhole-icon-personal-data-security-illustrates-cyber-data-information-privacy-idea-blue-color-abstract-hi-speed-internet-technology_542466-600.jpg?semt=ais_hybrid");
   background-size: cover;
   padding: 7%;
   padding-bottom: 13%;
@@ -446,10 +469,10 @@ header nav .buttons button:hover {
 }
 
 .leave-app {
-  background-image: url(https://img.freepik.com/free-vector/quitting-time-concept-illustration_114360-2175.jpg?t=st=1733480919~exp=1733484519~hmac=9066043d020b39474827ec435f1069bbff97329643b8d35b206317c4e9d1cc12&w=740);
-  margin: 0 auto;
+  margin: auto;
   background-repeat: no-repeat;
   width: 100%;
+  max-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -457,9 +480,10 @@ header nav .buttons button:hover {
 }
 .leave-app .form-leave {
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 20px;
-  margin-left: 50%;
+  margin: auto;
 }
 .leave-app .form-leave .leave-btn {
   display: flex;
@@ -470,7 +494,7 @@ header nav .buttons button:hover {
 }
 .leave-app .form-leave .input-leave input {
   border-radius: 5px;
-  background-color: rgba(50, 117, 217, 0.337254902);
+  background-color: #5be3a8;
   border: none;
   padding: 6px;
 }
@@ -479,15 +503,6 @@ header nav .buttons button:hover {
   max-width: 100px;
 }
 
-@media only screen and (max-width: 992px) {
-  #login-form .input {
-    width: 200px;
-    line-height: 32px;
-  }
-  #login-form .btn-sign {
-    width: 200px;
-  }
-}
 @media only screen and (max-width: 768px) {
   #login-form {
     gap: 20px;
@@ -507,4 +522,325 @@ header nav .buttons button:hover {
   #login-form .form-check {
     flex-wrap: wrap;
   }
-}/*# sourceMappingURL=main.css.map */
+  .img-leave img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+.verification {
+  font-size: 50px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+}
+
+.employees-information {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background-color: #253D90;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+}
+.employees-information p {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.employees-information .tesdiq {
+  font-weight: 700;
+  font-size: 50px;
+}
+
+.header-content {
+  font-size: 30px;
+  padding: 20px;
+  width: 900px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 5px;
+  margin: auto;
+}
+
+.permission-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  min-height: 300px;
+}
+
+.permission-card {
+  width: 100%;
+  max-width: 300px;
+  height: 150px;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #253D90;
+  gap: 20px;
+  justify-content: center;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.permission-days {
+  background-color: white;
+  border-radius: 50%;
+  width: 100%;
+  max-width: 70px;
+  height: 70px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  padding: 10px;
+}
+
+.permission-days {
+  width: 100%;
+  max-width: 50px;
+}
+
+.permission-humans {
+  width: 100%;
+  max-width: 200px;
+  height: 100px;
+}
+.permission-humans p {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.apply-btn {
+  background-color: #FFC20E;
+  width: 100%;
+  max-width: 150px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.table-striped {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.table-settings {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  height: 100px;
+  max-width: 1100px;
+  align-items: center;
+}
+.table-settings p {
+  font-size: 30px;
+}
+
+select {
+  background-color: #253D90;
+  color: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 120px;
+  height: 40px;
+}
+select option {
+  font-size: 20px;
+  background-color: white;
+  color: black;
+}
+
+.employed_main {
+  margin-left: 350px;
+  padding: 100px 0;
+}
+.employed_main .addnewuserbtn {
+  float: right;
+  margin-right: 50px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.create-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.create-container {
+  max-width: 800px;
+  background: #fff;
+  width: 800px;
+  padding: 25px 40px 10px 40px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-container .text {
+  text-align: center;
+  font-size: 41px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.create-container form {
+  padding: 30px 0 0 0;
+}
+
+.create-container form .form-row {
+  display: flex;
+  margin: 32px 0;
+}
+
+form .form-row .input-data {
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+
+form .form-row .textarea {
+  height: 70px;
+}
+
+.input-data input,
+.textarea textarea {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.input-data input:focus ~ label,
+.textarea textarea:focus ~ label,
+.input-data input:valid ~ label,
+.textarea textarea:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #3498db;
+}
+
+.textarea textarea {
+  resize: none;
+  padding-top: 10px;
+}
+
+.input-data label {
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.textarea label {
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
+}
+
+.input-data .underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.input-data .underline:before {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before,
+.textarea textarea:focus ~ .underline:before,
+.textarea textarea:valid ~ .underline:before {
+  transform: scale(1);
+}
+
+.submit-btn .input-data {
+  overflow: hidden;
+  height: 45px !important;
+  width: 25% !important;
+}
+
+.submit-btn .input-data .inner {
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+  transition: all 0.4s;
+}
+
+.submit-btn .input-data:hover .inner {
+  left: 0;
+}
+
+.submit-btn .input-data input {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 700px) {
+  .create-container .text {
+    font-size: 30px;
+  }
+  .create-container form {
+    padding: 10px 0 0 0;
+  }
+  .create-container form .form-row {
+    display: block;
+  }
+  form .form-row .input-data {
+    margin: 35px 0 !important;
+  }
+  .submit-btn .input-data {
+    width: 40% !important;
+  }
+}

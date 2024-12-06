@@ -1,67 +1,8 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
-    <link rel="shortcut icon"
-          href="https://cdn-icons-png.flaticon.com/512/4257/4257483.png"
-          type="image/x-icon" />
-    <link rel="stylesheet" href="~/assets/style/css/main.css" />
-    <title>XCELTECH | Admin</title>
-</head>
-<body>
-    <div class="admin-sidebar">
-        <div class="heading">
-            <div class="admin-icon">
-                <img src="~/assets/images/Group 1.png" alt="admin-avatar" />
-            </div>
-            <div class="admin-details">
-                <h2>Aman Admin</h2>
-                <p>Admin</p>
-            </div>
+﻿<main class="admin-dashboard">
+    <section class="admin-charts">
+        <h1>Dashboard</h1>
+        <div>
+            <canvas id="myChart"></canvas>
         </div>
-        <hr />
-    </div>
-
-    <main class="admin-dashboard">
-        <section class="admin-charts">
-            <h1>Dashboard</h1>
-            <div>
-                <canvas id="myChart"></canvas>
-            </div>
-        </section>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById("myChart");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [
-                    {
-                        label: "# of Votes",
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1,
-                    },
-                ],
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-            },
-        });
-    </script>
-</body>
-</html>
+    </section>
+</main>
