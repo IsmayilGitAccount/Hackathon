@@ -9,5 +9,7 @@ namespace WebApplication1.DAL
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Payroll> Payrolls { get; set; }
+
     }
 }
