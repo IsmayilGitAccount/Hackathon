@@ -1,6 +1,18 @@
 ﻿namespace WebApplication1.Enums
 {
-    public class Months
+    public enum Months
     {
+        Yanvar=1,
+        Fevral,
+        Mart,
+        Aprel,
+        May,
+        Iyun,
+        Iyul,
+        Avqust,
+        Sentyabr,
+        Oktyabr,
+        Noyabr,
+        Dekabr
     }
 }
