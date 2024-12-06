@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DAL;
+using WebApplication1.Helper;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +17,16 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 
 builder.Services.AddIdentity<Employee, IdentityRole>(opt =>
 {
-    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequiredLength = 8;
-
-    opt.User.RequireUniqueEmail = true;
+    opt.User.RequireUniqueEmail = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddScoped<EmailService>();
+
+var opt = new SmtpOption();
+builder.Services.Configure<SmtpOption>(builder.Configuration.GetSection("smtp"));
+builder.Services.Configure<SmtpOption>(builder.Configuration.GetSection(SmtpOption.Name));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -7,8 +7,6 @@ public class Employee : IdentityUser
 {
     [StringLength(100)]
     public string? FullName { get; set; }
-    public double? Salary { get; set; }
-    public double? Bonus { get; set; }
 
     public List<Contract>? Contracts { get; set; }
     public List<Payroll>? Payrolls { get; set; }

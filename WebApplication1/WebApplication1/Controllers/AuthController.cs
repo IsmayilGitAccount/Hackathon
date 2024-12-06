@@ -1,22 +1,48 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using System.Data;
 using System.Text;
+using WebApplication1.DAL;
 using WebApplication1.Helper;
 using WebApplication1.Models;
-using WebApplication1.Services.Abstrations;
 using WebApplication1.ViewModels.Login;
 
 namespace WebApplication1.Controllers
 {
-    public class AccountController(UserManager<Employee> _emp, SignInManager<Employee> _sign, IOptions<SmtpOption> _opt, IEmailService _service) : Controller
+    public class AccountController(AppDbContext _sql, UserManager<Employee> _emp, SignInManager<Employee> _sign, IOptions<SmtpOption> _opt) : Controller
     {
         SmtpOption smtp = _opt.Value;
-        bool isAuthenticated => User.Identity?.IsAuthenticated ?? false;
+
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> Create()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> Create(EmployeeCreateVM um)
+        //{
+        //    Employee emp = new()
+        //    {
+        //        FullName = um.FullName,
+        //    };
+        //    var result = await _emp.CreateAsync(emp, um.Password);
+        //    if (!result.Succeeded)
+        //    {
+        //        foreach (var error in result.Errors)
+        //        {
+        //            ModelState.AddModelError("", error.Description);
+
+        //        }
+        //        return View();
+        //    }
+        //    string token = await _emp.GenerateEmailConfirmationTokenAsync(emp);
+        //    _service.SendEmailConfirmation(emp.Email, emp.UserName, token);
+        //    return Content("Email send!");
+
+        //}
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -25,7 +51,6 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM lm, string? ReturnUrl = null)
         {
-            if (isAuthenticated) return RedirectToAction("Index", "Home");
             Employee? employee = null;
             if (!ModelState.IsValid) return View();
             if (lm.UsernameOrEmail.Contains('@'))
@@ -92,6 +117,72 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update()
+        {
+            var employee = await _emp.FindByNameAsync(User.Identity?.Name);
+            if (employee == null)
+            {
+                return Unauthorized();
+            }
+
+            var model = new EmployeeUpdateVM
+            {
+                FullName = employee.FullName,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(EmployeeUpdateVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var employee = await _emp.FindByNameAsync(User.Identity?.Name);
+            if (employee == null)
+            {
+                return Unauthorized();
+            }
+            employee.FullName = model.FullName;
+
+
+            if (!string.IsNullOrEmpty(model.Password))
+            {
+                var passwordChangeResult = await _emp.ChangePasswordAsync(
+                    employee,
+                    model.Password,
+                    model.NewPassword
+                );
+
+                if (!passwordChangeResult.Succeeded)
+                {
+                    foreach (var error in passwordChangeResult.Errors)
+                    {
+                        ModelState.AddModelError(" ", error.Description);
+                    }
+                    return View(model);
+                }
+            }
+
+            var updateResult = await _emp.UpdateAsync(employee);
+            if (!updateResult.Succeeded)
+            {
+                foreach (var error in updateResult.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
 
 
 
