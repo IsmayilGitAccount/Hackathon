@@ -32,19 +32,19 @@ namespace WebApplication1.Areas.manage.Controllers
         //    return Ok(result);
         //}
 
-        //public async Task<IActionResult> CreateAdmin()
-        //{
-        //    Employee newEmployee = new()
-        //    {
-        //        FullName = "Ulvi Abdullayev",
-        //        Email = "test123@gmail.com",
-        //        UserName = "superadmin",
-        //    };
+        public async Task<IActionResult> CreateAdmin()
+        {
+            Employee newEmployee = new()
+            {
+                FullName = "Enver Zohrabov",
+                Email = "enver@gmail.com",
+                UserName = "enver",
+            };
 
-        //    await _userManager.CreateAsync(newEmployee, "Salam123!");
-        //    var result = await _userManager.AddToRoleAsync(newEmployee, "SuperAdmin");
+            await _userManager.CreateAsync(newEmployee, "Salam123!");
+            var result = await _userManager.AddToRoleAsync(newEmployee, "Employee");
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
     }
 }

@@ -11,10 +11,11 @@ namespace WebApplication1.ViewModels.Login
         [Required, EmailAddress]
         public string EmailAddress { get; set; } = null!;
 
-        [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
-        [Required, DataType(DataType.Password), Compare(nameof(Password))]
-        public string RePassword { get; set; }
+        public DateTime StarDate { get; set; }
+        public DateTime EndDate { get; set; }
 
+        public double HourlyRate { get; set; }
+        public byte BonusPercentage { get; set; }
+        public int MonthlyMaxHours { get; set; }
     }
 }

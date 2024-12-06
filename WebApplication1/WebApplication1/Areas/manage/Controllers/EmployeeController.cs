@@ -1,51 +1,78 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using WebApplication1.Helper;
+using WebApplication1.DAL;
 using WebApplication1.Models;
-using WebApplication1.Services.Abstrations;
+using WebApplication1.Services;
 using WebApplication1.ViewModels.Login;
 
 namespace WebApplication1.Areas.manage.Controllers
 {
     [Area("manage")]
-    public class EmployeeController(UserManager<Employee> _emp, IEmailService _service) : Controller
+    public class EmployeeController : Controller
     {
-        //[HttpGet]
-        //public async Task<IActionResult> Create()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        public async Task<IActionResult> Create(/*EmployeeCreateVM um*/)
+        private readonly UserManager<Employee> _userManager;
+        private readonly EmailService _emailService;
+        private readonly AppDbContext _dbContext;
+
+        public EmployeeController(UserManager<Employee> userManager, EmailService emailService, AppDbContext dbContext)
         {
-            EmployeeCreateVM vmodel = new()
+            _userManager = userManager;
+            _emailService = emailService;
+            _dbContext = dbContext;
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(EmployeeCreateVM createVM)
+        {
+            try
             {
-                UserName = "stniyaz",
-                FullName = "asd asd",
-                EmailAddress = "soltanovniyaz@gmail.com",
-                Password ="asdasdhjbhjvjh2vA"
-            };
-            Employee emp = new()
-            {
-                UserName = vmodel.UserName,
-                Email = vmodel.EmailAddress,
-                FullName = vmodel.FullName,
-            };
-            var result = await _emp.CreateAsync(emp, vmodel.Password);
-            if (!result.Succeeded)
-            {
-                foreach (var error in result.Errors)
+                // create user
+                Employee newEmployee = new()
                 {
-                    ModelState.AddModelError("", error.Description);
+                    UserName = createVM.UserName,
+                    FullName = createVM.FullName,
+                    Email = createVM.EmailAddress
+                };
 
+                var result = await _userManager.CreateAsync(newEmployee, "Salam123!");
+                if (!result.Succeeded)
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, err.Description);
+                    }
                 }
-                return Ok(result);
-            }
-            string token = await _emp.GenerateEmailConfirmationTokenAsync(emp);
-            _service.SendEmailConfirmation(emp.Email, emp.UserName, token);
-            return Ok("Email send!");
+                await _userManager.AddToRoleAsync(newEmployee, "Employee");
 
+                // contract
+                Contract newContarct = new Contract()
+                {
+                    EmployeeId = newEmployee.Id,
+                    HourlyRate = createVM.HourlyRate,
+                    BonusPercentage = createVM.BonusPercentage,
+                    MonthlyMaxHours = createVM.MonthlyMaxHours,
+                    StartDate = createVM.StarDate,
+                    EndDate = createVM.EndDate,
+                };
+
+                // email and send
+                await _dbContext.Contracts.AddAsync(newContarct);
+                await _dbContext.SaveChangesAsync();
+
+                _emailService.SendEmail(newEmployee.Email, newEmployee.UserName);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+
+            return RedirectToAction("index", "dashboard");
         }
     }
 }

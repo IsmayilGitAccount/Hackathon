@@ -1,22 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using System.Data;
 using System.Text;
 using WebApplication1.DAL;
 using WebApplication1.Helper;
 using WebApplication1.Models;
-using WebApplication1.Services.Abstrations;
 using WebApplication1.ViewModels.Login;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WebApplication1.Controllers
 {
-    public class AccountController(AppDbContext _sql, UserManager<Employee> _emp, SignInManager<Employee> _sign, IOptions<SmtpOption> _opt, IEmailService _service) : Controller
+    public class AccountController(AppDbContext _sql, UserManager<Employee> _emp, SignInManager<Employee> _sign, IOptions<SmtpOption> _opt) : Controller
     {
         SmtpOption smtp = _opt.Value;
 
@@ -190,7 +184,7 @@ namespace WebApplication1.Controllers
 
 
 
-     
+
 
     }
 }

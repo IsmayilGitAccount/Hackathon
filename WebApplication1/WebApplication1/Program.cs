@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.DAL;
 using WebApplication1.Helper;
 using WebApplication1.Models;
-using WebApplication1.Services.Abstrations;
-using WebApplication1.Services.Implements;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +22,8 @@ builder.Services.AddIdentity<Employee, IdentityRole>(opt =>
     opt.User.RequireUniqueEmail = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<EmailService>();
+
 var opt = new SmtpOption();
 builder.Services.Configure<SmtpOption>(builder.Configuration.GetSection("smtp"));
 builder.Services.Configure<SmtpOption>(builder.Configuration.GetSection(SmtpOption.Name));
