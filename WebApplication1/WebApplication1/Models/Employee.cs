@@ -10,12 +10,12 @@ public class Employee : IdentityUser
     public double? Salary { get; set; }
     public double? Bonus { get; set; }
 
-    public List<Contract> Contracts { get; set; }
-    public List<Payroll> Payrolls { get; set; }
+    public List<Contract>? Contracts { get; set; }
+    public List<Payroll>? Payrolls { get; set; }
 
     //relational
 
-    public List<VacationRequests> Vacations { get; set; }
+    public List<VacationRequests>? Vacations { get; set; }
 
 
 }
